@@ -36,5 +36,5 @@ frontend www
 {{ range services }}
 backend {{ .Name }}_backend
 {{ range service .Name }}
-        server {{ .Name }}-{{ .Port }} {{ .Address }}:{{ .Port }}{{ end }}
+        server {{ .ID }} {{ .Address }}:{{ .Port }}{{ end }}
 {{ end }}
