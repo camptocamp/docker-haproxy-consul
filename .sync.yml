@@ -1,0 +1,4 @@
+---
+:global:
+  docker_image_name: 'haproxy-consul'
+  travis_key_id: '28afee7230d6'
