@@ -37,4 +37,7 @@ frontend www
 backend {{ .Name }}_backend
 {{ range service .Name }}
         server {{ .ID }} {{ .Address }}:{{ .Port }}{{ end }}
+{{ if .Tags | contains "sticky_session" }}
+        # sticky
+{{ end }}
 {{ end }}
