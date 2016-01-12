@@ -35,9 +35,14 @@ frontend www
 
 {{ range services }}
 backend {{ .Name }}_backend
+{{ if .Tags | contains "sticky_session" }}
+      # sticky
+{{ end }}
+{{ range .Tags }}
+  {{ if . | regexMatch "public_ipaddress=" }}
+      # public_ipaddress = {{ . | regexReplaceAll ".*=" "" }}
+  {{ end }}
+{{ end }}
 {{ range service .Name }}
         server {{ .ID }} {{ .Address }}:{{ .Port }}{{ end }}
-{{ if .Tags | contains "sticky_session" }}
-        # sticky
-{{ end }}
 {{ end }}
