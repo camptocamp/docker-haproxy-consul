@@ -42,6 +42,9 @@ backend {{ .Name }}_backend
   {{ if . | regexMatch "public_ipaddress=" }}
       # public_ipaddress = {{ . | regexReplaceAll ".*=" "" }}
   {{ end }}
+  {{ if . | regexMatch "server_aliases=" }}
+      # server_aliases = {{ . | regexReplaceAll ".*=" "" | split ":" | join " " }}
+  {{ end }}
 {{ end }}
 {{ range service .Name }}
         server {{ .ID }} {{ .Address }}:{{ .Port }}{{ end }}
