@@ -32,8 +32,8 @@ frontend www
         acl host_{{ .Name }} hdr(host) -i {{ .Name | replaceAll "_" "." }}{{ if env "HAPROXY_DOMAIN" }}.{{ env "HAPROXY_DOMAIN" }}{{ end }}
   {{ $service := . }}
   {{ range .Tags }}
-    {{ if . | regexMatch "server_aliases=" }}
-        acl host_{{ $service.Name }} hdr(host) -i {{ . | regexReplaceAll ".*=" "" | split ":" | join " " }}
+    {{ if . | regexMatch "server_alias=" }}
+        acl host_{{ $service.Name }} hdr(host) -i {{ . | regexReplaceAll ".*=" "" }}
     {{ end }}
   {{ end }}
 
