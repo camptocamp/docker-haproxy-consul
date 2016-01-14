@@ -32,7 +32,7 @@ frontend www
   {{ $service := . }}
         acl host_{{ $service.Name }} hdr(host) -i {{ $service.Name | replaceAll "_" "." }}
   {{ if env "HAPROXY_DOMAIN" }}
-    {{ $haproxy_domain = env "HAPROXY_DOMAIN" | split ":" }}
+    {{ $haproxy_domain := env "HAPROXY_DOMAIN" | split ":" }}
     {{ range $haproxy_domain }}
         acl host_{{ $service.Name }} hdr(host) -i {{ $service.Name | replaceAll "_" "." }}.{{ . }}
     {{ end }}
