@@ -2,7 +2,7 @@ FROM debian:stretch
 
 MAINTAINER Mathieu Bornoz <mathieu.bornoz@camptocamp.com>
 
-ENV CONSUL_TEMPLATE_VERSION=0.11.1
+ENV CONSUL_TEMPLATE_VERSION=0.18.1
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
