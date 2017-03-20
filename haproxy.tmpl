@@ -52,6 +52,6 @@ backend {{ .Name }}_backend
       # sticky
   {{ end }}
   {{ range service .Name }}
-        server {{ .ID }} {{ .Address }}:{{ .Port }}
+        server {{ .Node }} {{ .Address }}:{{ .Port }}
   {{ end }}
 {{ end }}

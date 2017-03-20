@@ -1,13 +1,10 @@
-FROM debian:stretch
-
-MAINTAINER Mathieu Bornoz <mathieu.bornoz@camptocamp.com>
+FROM alpine:3.4
 
 ENV CONSUL_TEMPLATE_VERSION=0.18.1
-ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update \
-  && apt-get install -y curl unzip haproxy procps \
-  && rm -rf /var/lib/apt/lists/*
+RUN apk update && \
+    apk add libnl3 bash haproxy ca-certificates zip && \
+    rm -rf /var/cache/apk/*
 
 ADD https://releases.hashicorp.com/consul-template/${CONSUL_TEMPLATE_VERSION}/consul-template_${CONSUL_TEMPLATE_VERSION}_linux_amd64.zip /
 
@@ -21,5 +18,6 @@ ADD consul.cfg /etc/consul-template/config.d/consul.cfg
 ADD haproxy-consul.cfg /etc/consul-template/config.d/haproxy.cfg
 ADD haproxy.tmpl /etc/consul-template/template.d/haproxy.tmpl
 ADD launch.sh /launch.sh
+ADD haproxy.sh /haproxy.sh
 
 CMD ["/launch.sh"]
